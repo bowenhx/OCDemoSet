@@ -1,0 +1,554 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		928B3E1021869B7A003AD3DC /* libBKSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 928B3E0E21869B71003AD3DC /* libBKSDK.a */; };
+		928B3E3A21869E4E003AD3DC /* emoticon.json in Resources */ = {isa = PBXBuildFile; fileRef = 928B3E2421869E4E003AD3DC /* emoticon.json */; };
+		928B3E5E21869ED4003AD3DC /* SmiliesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 928B3E4221869ED4003AD3DC /* SmiliesManager.m */; };
+		928B3E5F21869ED4003AD3DC /* SmiliesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 928B3E4421869ED4003AD3DC /* SmiliesModel.m */; };
+		928B3E6021869ED4003AD3DC /* OneExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 928B3E4621869ED4003AD3DC /* OneExampleViewController.m */; };
+		928B3E6121869ED4003AD3DC /* OneExampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 928B3E4721869ED4003AD3DC /* OneExampleViewController.xib */; };
+		928B3E6221869ED4003AD3DC /* EmoticonInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 928B3E4A21869ED4003AD3DC /* EmoticonInputView.m */; };
+		928B3E6321869ED4003AD3DC /* PhotosGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 928B3E4C21869ED4003AD3DC /* PhotosGroupView.m */; };
+		928B3E6421869ED4003AD3DC /* ToolbarImagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 928B3E4E21869ED4003AD3DC /* ToolbarImagesView.m */; };
+		928B3E6521869ED4003AD3DC /* ToolbarInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 928B3E5021869ED4003AD3DC /* ToolbarInputView.m */; };
+		928B3E6621869ED4003AD3DC /* NSString+UIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 928B3E5421869ED4003AD3DC /* NSString+UIColor.m */; };
+		928B3E6721869ED4003AD3DC /* UIViewController+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 928B3E5621869ED4003AD3DC /* UIViewController+Utilities.m */; };
+		928B3E6821869ED4003AD3DC /* BKCustomPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 928B3E5B21869ED4003AD3DC /* BKCustomPickerView.m */; };
+		928B3E6921869ED4003AD3DC /* CustomAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 928B3E5D21869ED4003AD3DC /* CustomAlertController.m */; };
+		928B3E6B2186B668003AD3DC /* EKSmiley.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 928B3E6A2186B668003AD3DC /* EKSmiley.bundle */; };
+		928B3E6F2186BCFD003AD3DC /* ThemeDetailMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 928B3E6E2186BCFD003AD3DC /* ThemeDetailMoreView.m */; };
+		92B4737E21804AA90026E371 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 92B4737D21804AA90026E371 /* AppDelegate.m */; };
+		92B4738421804AA90026E371 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92B4738221804AA90026E371 /* Main.storyboard */; };
+		92B4738621804AAB0026E371 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92B4738521804AAB0026E371 /* Assets.xcassets */; };
+		92B4738921804AAB0026E371 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92B4738721804AAB0026E371 /* LaunchScreen.storyboard */; };
+		92B4738C21804AAB0026E371 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 92B4738B21804AAB0026E371 /* main.m */; };
+		92B4739421804EAC0026E371 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92B4739321804EAC0026E371 /* HomeViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		928B3E0D21869B71003AD3DC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 928B3E0921869B71003AD3DC /* BKSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 042114101E8BAF3F00A058ED;
+			remoteInfo = BKSDK;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		928B3E0921869B71003AD3DC /* BKSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BKSDK.xcodeproj; path = BKSDK/BKSDK.xcodeproj; sourceTree = "<group>"; };
+		928B3E2421869E4E003AD3DC /* emoticon.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = emoticon.json; sourceTree = "<group>"; };
+		928B3E4121869ED4003AD3DC /* SmiliesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmiliesManager.h; sourceTree = "<group>"; };
+		928B3E4221869ED4003AD3DC /* SmiliesManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmiliesManager.m; sourceTree = "<group>"; };
+		928B3E4321869ED4003AD3DC /* SmiliesModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmiliesModel.h; sourceTree = "<group>"; };
+		928B3E4421869ED4003AD3DC /* SmiliesModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmiliesModel.m; sourceTree = "<group>"; };
+		928B3E4521869ED4003AD3DC /* OneExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneExampleViewController.h; sourceTree = "<group>"; };
+		928B3E4621869ED4003AD3DC /* OneExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneExampleViewController.m; sourceTree = "<group>"; };
+		928B3E4721869ED4003AD3DC /* OneExampleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OneExampleViewController.xib; sourceTree = "<group>"; };
+		928B3E4921869ED4003AD3DC /* EmoticonInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmoticonInputView.h; sourceTree = "<group>"; };
+		928B3E4A21869ED4003AD3DC /* EmoticonInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmoticonInputView.m; sourceTree = "<group>"; };
+		928B3E4B21869ED4003AD3DC /* PhotosGroupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotosGroupView.h; sourceTree = "<group>"; };
+		928B3E4C21869ED4003AD3DC /* PhotosGroupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotosGroupView.m; sourceTree = "<group>"; };
+		928B3E4D21869ED4003AD3DC /* ToolbarImagesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolbarImagesView.h; sourceTree = "<group>"; };
+		928B3E4E21869ED4003AD3DC /* ToolbarImagesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToolbarImagesView.m; sourceTree = "<group>"; };
+		928B3E4F21869ED4003AD3DC /* ToolbarInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolbarInputView.h; sourceTree = "<group>"; };
+		928B3E5021869ED4003AD3DC /* ToolbarInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToolbarInputView.m; sourceTree = "<group>"; };
+		928B3E5321869ED4003AD3DC /* NSString+UIColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UIColor.h"; sourceTree = "<group>"; };
+		928B3E5421869ED4003AD3DC /* NSString+UIColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+UIColor.m"; sourceTree = "<group>"; };
+		928B3E5521869ED4003AD3DC /* UIViewController+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Utilities.h"; sourceTree = "<group>"; };
+		928B3E5621869ED4003AD3DC /* UIViewController+Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Utilities.m"; sourceTree = "<group>"; };
+		928B3E5721869ED4003AD3DC /* ToolHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolHeader.h; sourceTree = "<group>"; };
+		928B3E5A21869ED4003AD3DC /* BKCustomPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BKCustomPickerView.h; sourceTree = "<group>"; };
+		928B3E5B21869ED4003AD3DC /* BKCustomPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BKCustomPickerView.m; sourceTree = "<group>"; };
+		928B3E5C21869ED4003AD3DC /* CustomAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAlertController.h; sourceTree = "<group>"; };
+		928B3E5D21869ED4003AD3DC /* CustomAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAlertController.m; sourceTree = "<group>"; };
+		928B3E6A2186B668003AD3DC /* EKSmiley.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = EKSmiley.bundle; sourceTree = "<group>"; };
+		928B3E6D2186BCFD003AD3DC /* ThemeDetailMoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemeDetailMoreView.h; sourceTree = "<group>"; };
+		928B3E6E2186BCFD003AD3DC /* ThemeDetailMoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThemeDetailMoreView.m; sourceTree = "<group>"; };
+		92B4737921804AA90026E371 /* OCDeomSet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OCDeomSet.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		92B4737C21804AA90026E371 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		92B4737D21804AA90026E371 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		92B4738321804AA90026E371 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		92B4738521804AAB0026E371 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		92B4738821804AAB0026E371 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		92B4738A21804AAB0026E371 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		92B4738B21804AAB0026E371 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		92B4739221804EAC0026E371 /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		92B4739321804EAC0026E371 /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		92B4737621804AA90026E371 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				928B3E1021869B7A003AD3DC /* libBKSDK.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		928B3E0A21869B71003AD3DC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				928B3E0E21869B71003AD3DC /* libBKSDK.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		928B3E0F21869B7A003AD3DC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		928B3E2321869E4E003AD3DC /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				928B3E2421869E4E003AD3DC /* emoticon.json */,
+				928B3E6A2186B668003AD3DC /* EKSmiley.bundle */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		928B3E3F21869ED4003AD3DC /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				928B3E4021869ED4003AD3DC /* Models */,
+				928B3E4521869ED4003AD3DC /* OneExampleViewController.h */,
+				928B3E4621869ED4003AD3DC /* OneExampleViewController.m */,
+				928B3E4721869ED4003AD3DC /* OneExampleViewController.xib */,
+				928B3E4821869ED4003AD3DC /* Views */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		928B3E4021869ED4003AD3DC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				928B3E4121869ED4003AD3DC /* SmiliesManager.h */,
+				928B3E4221869ED4003AD3DC /* SmiliesManager.m */,
+				928B3E4321869ED4003AD3DC /* SmiliesModel.h */,
+				928B3E4421869ED4003AD3DC /* SmiliesModel.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		928B3E4821869ED4003AD3DC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				928B3E6C2186BCFD003AD3DC /* MoreView */,
+				928B3E4921869ED4003AD3DC /* EmoticonInputView.h */,
+				928B3E4A21869ED4003AD3DC /* EmoticonInputView.m */,
+				928B3E4B21869ED4003AD3DC /* PhotosGroupView.h */,
+				928B3E4C21869ED4003AD3DC /* PhotosGroupView.m */,
+				928B3E4D21869ED4003AD3DC /* ToolbarImagesView.h */,
+				928B3E4E21869ED4003AD3DC /* ToolbarImagesView.m */,
+				928B3E4F21869ED4003AD3DC /* ToolbarInputView.h */,
+				928B3E5021869ED4003AD3DC /* ToolbarInputView.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		928B3E5121869ED4003AD3DC /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				928B3E5721869ED4003AD3DC /* ToolHeader.h */,
+				928B3E5221869ED4003AD3DC /* Extension */,
+				928B3E5821869ED4003AD3DC /* ToolViews */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		928B3E5221869ED4003AD3DC /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				928B3E5321869ED4003AD3DC /* NSString+UIColor.h */,
+				928B3E5421869ED4003AD3DC /* NSString+UIColor.m */,
+				928B3E5521869ED4003AD3DC /* UIViewController+Utilities.h */,
+				928B3E5621869ED4003AD3DC /* UIViewController+Utilities.m */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		928B3E5821869ED4003AD3DC /* ToolViews */ = {
+			isa = PBXGroup;
+			children = (
+				928B3E5921869ED4003AD3DC /* CustomAlertController */,
+			);
+			path = ToolViews;
+			sourceTree = "<group>";
+		};
+		928B3E5921869ED4003AD3DC /* CustomAlertController */ = {
+			isa = PBXGroup;
+			children = (
+				928B3E5A21869ED4003AD3DC /* BKCustomPickerView.h */,
+				928B3E5B21869ED4003AD3DC /* BKCustomPickerView.m */,
+				928B3E5C21869ED4003AD3DC /* CustomAlertController.h */,
+				928B3E5D21869ED4003AD3DC /* CustomAlertController.m */,
+			);
+			path = CustomAlertController;
+			sourceTree = "<group>";
+		};
+		928B3E6C2186BCFD003AD3DC /* MoreView */ = {
+			isa = PBXGroup;
+			children = (
+				928B3E6D2186BCFD003AD3DC /* ThemeDetailMoreView.h */,
+				928B3E6E2186BCFD003AD3DC /* ThemeDetailMoreView.m */,
+			);
+			path = MoreView;
+			sourceTree = "<group>";
+		};
+		92B4737021804AA90026E371 = {
+			isa = PBXGroup;
+			children = (
+				928B3E0921869B71003AD3DC /* BKSDK.xcodeproj */,
+				92B4737B21804AA90026E371 /* OCDeomSet */,
+				92B4737A21804AA90026E371 /* Products */,
+				928B3E0F21869B7A003AD3DC /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		92B4737A21804AA90026E371 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				92B4737921804AA90026E371 /* OCDeomSet.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		92B4737B21804AA90026E371 /* OCDeomSet */ = {
+			isa = PBXGroup;
+			children = (
+				92B4737C21804AA90026E371 /* AppDelegate.h */,
+				92B4737D21804AA90026E371 /* AppDelegate.m */,
+				92B4739221804EAC0026E371 /* HomeViewController.h */,
+				92B4739321804EAC0026E371 /* HomeViewController.m */,
+				92B4738221804AA90026E371 /* Main.storyboard */,
+				928B3E3F21869ED4003AD3DC /* Utility */,
+				928B3E5121869ED4003AD3DC /* Tools */,
+				928B3E2321869E4E003AD3DC /* Resource */,
+				92B4738521804AAB0026E371 /* Assets.xcassets */,
+				92B4738721804AAB0026E371 /* LaunchScreen.storyboard */,
+				92B4738A21804AAB0026E371 /* Info.plist */,
+				92B4738B21804AAB0026E371 /* main.m */,
+			);
+			path = OCDeomSet;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		92B4737821804AA90026E371 /* OCDeomSet */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 92B4738F21804AAB0026E371 /* Build configuration list for PBXNativeTarget "OCDeomSet" */;
+			buildPhases = (
+				92B4737521804AA90026E371 /* Sources */,
+				92B4737621804AA90026E371 /* Frameworks */,
+				92B4737721804AA90026E371 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OCDeomSet;
+			productName = OCDeomSet;
+			productReference = 92B4737921804AA90026E371 /* OCDeomSet.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		92B4737121804AA90026E371 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0930;
+				ORGANIZATIONNAME = com.professional.cn;
+				TargetAttributes = {
+					92B4737821804AA90026E371 = {
+						CreatedOnToolsVersion = 9.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 92B4737421804AA90026E371 /* Build configuration list for PBXProject "OCDeomSet" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 92B4737021804AA90026E371;
+			productRefGroup = 92B4737A21804AA90026E371 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 928B3E0A21869B71003AD3DC /* Products */;
+					ProjectRef = 928B3E0921869B71003AD3DC /* BKSDK.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				92B4737821804AA90026E371 /* OCDeomSet */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		928B3E0E21869B71003AD3DC /* libBKSDK.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libBKSDK.a;
+			remoteRef = 928B3E0D21869B71003AD3DC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		92B4737721804AA90026E371 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				928B3E6B2186B668003AD3DC /* EKSmiley.bundle in Resources */,
+				92B4738921804AAB0026E371 /* LaunchScreen.storyboard in Resources */,
+				92B4738621804AAB0026E371 /* Assets.xcassets in Resources */,
+				928B3E3A21869E4E003AD3DC /* emoticon.json in Resources */,
+				92B4738421804AA90026E371 /* Main.storyboard in Resources */,
+				928B3E6121869ED4003AD3DC /* OneExampleViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		92B4737521804AA90026E371 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				928B3E5E21869ED4003AD3DC /* SmiliesManager.m in Sources */,
+				928B3E6521869ED4003AD3DC /* ToolbarInputView.m in Sources */,
+				928B3E6421869ED4003AD3DC /* ToolbarImagesView.m in Sources */,
+				928B3E6321869ED4003AD3DC /* PhotosGroupView.m in Sources */,
+				92B4738C21804AAB0026E371 /* main.m in Sources */,
+				928B3E6621869ED4003AD3DC /* NSString+UIColor.m in Sources */,
+				928B3E6021869ED4003AD3DC /* OneExampleViewController.m in Sources */,
+				928B3E6921869ED4003AD3DC /* CustomAlertController.m in Sources */,
+				928B3E6821869ED4003AD3DC /* BKCustomPickerView.m in Sources */,
+				928B3E6721869ED4003AD3DC /* UIViewController+Utilities.m in Sources */,
+				928B3E6221869ED4003AD3DC /* EmoticonInputView.m in Sources */,
+				928B3E6F2186BCFD003AD3DC /* ThemeDetailMoreView.m in Sources */,
+				92B4737E21804AA90026E371 /* AppDelegate.m in Sources */,
+				928B3E5F21869ED4003AD3DC /* SmiliesModel.m in Sources */,
+				92B4739421804EAC0026E371 /* HomeViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		92B4738221804AA90026E371 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				92B4738321804AA90026E371 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		92B4738721804AAB0026E371 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				92B4738821804AAB0026E371 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		92B4738D21804AAB0026E371 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		92B4738E21804AAB0026E371 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		92B4739021804AAB0026E371 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZD9PB6A8X6;
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/BKSDK/BKSDK\"/**";
+				INFOPLIST_FILE = OCDeomSet/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.foremind.babykingdomx.OCDeomSet;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		92B4739121804AAB0026E371 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZD9PB6A8X6;
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/BKSDK/BKSDK\"/**";
+				INFOPLIST_FILE = OCDeomSet/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.foremind.babykingdomx.OCDeomSet;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		92B4737421804AA90026E371 /* Build configuration list for PBXProject "OCDeomSet" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				92B4738D21804AAB0026E371 /* Debug */,
+				92B4738E21804AAB0026E371 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		92B4738F21804AAB0026E371 /* Build configuration list for PBXNativeTarget "OCDeomSet" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				92B4739021804AAB0026E371 /* Debug */,
+				92B4739121804AAB0026E371 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 92B4737121804AA90026E371 /* Project object */;
+}
