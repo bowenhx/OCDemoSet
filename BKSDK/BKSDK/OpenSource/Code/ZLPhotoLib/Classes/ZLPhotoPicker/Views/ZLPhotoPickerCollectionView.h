@@ -23,6 +23,7 @@ typedef NS_ENUM(NSUInteger, ZLPickerCollectionViewShowOrderStatus){
 // 点击拍照就会调用
 - (void)pickerCollectionViewDidCameraSelect:(ZLPhotoPickerCollectionView *) pickerCollectionView;
 
+@optional
 //重新进入系统相册调用
 - (void)pickerCollectionViewAgainSelect:(ZLPhotoPickerCollectionView *)pickerCollectionView;
 @end
@@ -45,6 +46,8 @@ typedef NS_ENUM(NSUInteger, ZLPickerCollectionViewShowOrderStatus){
 @property (assign,nonatomic) BOOL topShowPhotoPicker;
 // 显示拍照
 @property (assign,nonatomic) BOOL isShowCamera;
+// 修改：显示拍照左下角是否添加选择照片 默认不添加
+@property (assign, nonatomic) BOOL isShowSeeAll;
 // 选中的索引值，为了防止重用
 @property (nonatomic , strong) NSMutableArray *selectsIndexPath;
 // 记录选中的值

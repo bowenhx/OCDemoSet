@@ -53,6 +53,13 @@
 #define WEAKSELF(type)          try{}@finally{} __weak typeof(type) type##Weak = type;
 #define STRONGSELF(type)        __strong typeof(type) type = weak##type;
 
+//int 类型转换 NSString 类型
+#define kStringInt(i)       [NSString stringWithFormat:@"%ld", (long)i]
+#define kString_Int(str, i)  [NSString stringWithFormat:@"%@%ld", str, (long)i]
+
+//string 拼接字符串
+#define kString_Str(str1, str2)  [NSString stringWithFormat:@"%@%@", str1, str2]
+
 //打印日志
 #ifdef  DEBUG
 #define DLog(...) NSLog(@"%s 第%d行 \n %@\n\n",__func__,__LINE__,[NSString stringWithFormat:__VA_ARGS__])

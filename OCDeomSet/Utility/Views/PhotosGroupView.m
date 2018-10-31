@@ -6,8 +6,8 @@
  */
 
 #import "PhotosGroupView.h"
-#import "ToolHeader.h"
-static NSInteger const kMaxCount = 9; //最多选9张
+
+
 static NSString *const kCellIdentifier = @"cell";
 
 
@@ -24,8 +24,8 @@ static NSString *const kCellIdentifier = @"cell";
 
 - (instancetype)init {
     self = [super init];
-    _imageWH = kSCREEN_WIDTH / 3;
-    self.frame = CGRectMake(0, 0, kSCREEN_WIDTH, _imageWH);
+    _imageWH = (kSCREEN_WIDTH - 4) / 3;
+    self.frame = CGRectMake(0, 0, kSCREEN_WIDTH, _imageWH + 2);
     self.backgroundColor = [UIColor whiteColor];
     [self initCollectionView];
     [self getPhotosData];
@@ -45,11 +45,11 @@ static NSString *const kCellIdentifier = @"cell";
     ZLPhotoPickerGroup *gp = nil;
     for (ZLPhotoPickerGroup *group in self.groups) {
         if ([group.groupName isEqualToString:@"Camera Roll"] ||
-             [group.groupName isEqualToString:@"相机胶卷"]) {
+             [group.groupName isEqualToString:@"相機膠捲"]) {
             gp = group;
             break;
         } else if ([group.groupName isEqualToString:@"Saved Photos"] ||
-                   [group.groupName isEqualToString:@"保存相册"]) {
+                   [group.groupName isEqualToString:@"保存相冊"]) {
             gp = group;
             break;
         } else if ([group.groupName isEqualToString:@"Stream"] ||
@@ -58,7 +58,6 @@ static NSString *const kCellIdentifier = @"cell";
             break;
         }
     }
-    
     if (!gp) return;
     
     __weak typeof(self) weakSelf = self;
@@ -71,6 +70,10 @@ static NSString *const kCellIdentifier = @"cell";
         if (isCamera) {
             weakSelf.collectionView.isRecoderSelectPicker = YES;
             [weakSelf.collectionView.selectAssets addObject:weakSelf.dataArray.firstObject];
+            weakSelf.selectAssets = weakSelf.collectionView.selectAssets;
+            if (weakSelf.showInsertButton) {
+                weakSelf.showInsertButton(@(weakSelf.selectAssets.count).boolValue);
+            }
         }
         
         if (weakSelf.collectionView.isShowCamera) {
@@ -81,12 +84,25 @@ static NSString *const kCellIdentifier = @"cell";
     }];
 }
 
+- (void)setMaxCount:(NSUInteger)maxCount {
+    _maxCount = maxCount;
+    self.collectionView.maxCount = _maxCount;
+}
+
+- (void)reloadPhotos {
+    self.collectionView.isRecoderSelectPicker = NO;
+    [self.collectionView.selectAssets removeAllObjects];
+    [self.collectionView.selectsIndexPath removeAllObjects];
+    [self.collectionView reloadData];
+}
+
 #pragma mark - ZLPhotoPickerCollectionViewDelegate
 // 选择相片就会调用
 - (void)pickerCollectionViewDidSelected:(ZLPhotoPickerCollectionView *)pickerCollectionView
                             deleteAsset:(ZLPhotoAssets *)deleteAssets {
-    if (deleteAssets == nil) {
-        [self.selectAssets setArray:pickerCollectionView.selectAssets];
+    [self.selectAssets setArray:pickerCollectionView.selectAssets];
+    if (_showInsertButton) {
+        _showInsertButton(@(self.selectAssets.count).boolValue);
     }
 }
 
@@ -101,26 +117,7 @@ static NSString *const kCellIdentifier = @"cell";
 
 //重新进入系统相册，查看竖屏全部图片
 - (void)pickerCollectionViewAgainSelect:(ZLPhotoPickerCollectionView *)pickerCollectionView {
-    ZLPhotoPickerViewController *pickerVc = [[ZLPhotoPickerViewController alloc] init];
-    // MaxCount, Default = 9
-    pickerVc.maxCount = 9;
-    // Jump AssetsVc
-    pickerVc.status = PickerViewShowStatusCameraRoll;
-    // Filter: PickerPhotoStatusAllVideoAndPhotos, PickerPhotoStatusVideos, PickerPhotoStatusPhotos.
-    pickerVc.photoStatus = PickerPhotoStatusPhotos;
-    // Recoder Select Assets
-    //    pickerVc.selectPickers = self.assets;
-    // Desc Show Photos, And Suppor Camera
-    pickerVc.topShowPhotoPicker = YES;
-    pickerVc.isShowCamera = YES;
-    // CallBack
-    pickerVc.callBack = ^(NSArray<ZLPhotoAssets *> *status) {
-        NSLog(@"status.count = %ld",status.count);
-        //        self.assets = status.mutableCopy;
-        //        [self reloadScrollView];
-    };
-    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
-    [pickerVc showPickerVc:window.rootViewController];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"selectedPhotosNotification" object:nil];
 }
 
 
@@ -157,24 +154,25 @@ static NSString *const kCellIdentifier = @"cell";
 - (void)initCollectionView {
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    layout.itemSize = CGSizeMake(_imageWH-1 , _imageWH-1);
-    layout.sectionInset = UIEdgeInsetsMake(0, 1, 1, 0);
+    layout.itemSize = CGSizeMake(_imageWH , _imageWH);
+    layout.sectionInset = UIEdgeInsetsMake(0, 1, 1, 1);
     layout.minimumInteritemSpacing = 1;
-    layout.minimumLineSpacing = CELL_LINE_MARGIN;
+    layout.minimumLineSpacing = 1;
     
     _collectionView = [[ZLPhotoPickerCollectionView alloc] initWithFrame:self.bounds collectionViewLayout:layout];
     _collectionView.status = ZLPickerCollectionViewShowOrderStatusTimeAsc;
     _collectionView.translatesAutoresizingMaskIntoConstraints = NO;
     _collectionView.showsHorizontalScrollIndicator = NO;
     [_collectionView registerClass:ZLPhotoPickerCollectionViewCell.class forCellWithReuseIdentifier:kCellIdentifier];
-    _collectionView.maxCount = kMaxCount;
+    _collectionView.maxCount = _maxCount;
     _collectionView.isShowCamera = YES;
+    _collectionView.isShowSeeAll = YES;
     _collectionView.topShowPhotoPicker = YES;
     _collectionView.collectionViewDelegate = self;
     [self addSubview:_collectionView];
 }
 
-- (NSMutableArray <ZLPhotoAssets *>*)selectAssets{
+- (NSMutableArray <ZLPhotoAssets *>*)selectAssets {
     if (!_selectAssets) {
         _selectAssets = [NSMutableArray array];
     }

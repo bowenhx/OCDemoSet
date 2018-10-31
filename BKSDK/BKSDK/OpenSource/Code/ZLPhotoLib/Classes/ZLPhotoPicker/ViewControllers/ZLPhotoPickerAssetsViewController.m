@@ -13,6 +13,8 @@
 #import "ZLPhotoPickerGroup.h"
 #import "ZLPhotoPickerCollectionViewCell.h"
 #import "ZLPhotoPickerFooterCollectionReusableView.h"
+#import "BKDefineFile.h"
+#import "Masonry.h"
 
 static NSString *const _cellIdentifier = @"cell";
 static NSString *const _footerIdentifier = @"FooterView";
@@ -76,7 +78,6 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
 
 - (UICollectionView *)toolBarThumbCollectionView{
     if (!_toolBarThumbCollectionView) {
-        
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
         flowLayout.itemSize = CGSizeMake(40, 40);
         flowLayout.minimumInteritemSpacing = 0;
@@ -92,7 +93,6 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
         
         self.toolBarThumbCollectionView = toolBarThumbCollectionView;
         [self.toolBar addSubview:toolBarThumbCollectionView];
-        
     }
     return _toolBarThumbCollectionView;
 }
@@ -162,16 +162,17 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
         
         collectionView.contentInset = UIEdgeInsetsMake(5, 0,TOOLBAR_HEIGHT, 0);
         collectionView.collectionViewDelegate = self;
-        [self.view insertSubview:_collectionView = collectionView belowSubview:self.toolBar];
+        [self.view addSubview:_collectionView = collectionView];
         
-        NSDictionary *views = NSDictionaryOfVariableBindings(collectionView);
+        CGFloat topSpace = 0;
+        if (kiOS11) {
+            topSpace = kNAV_BAR_HEIGHT;
+        }
         
-        NSString *widthVfl = @"H:|-0-[collectionView]-0-|";
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:widthVfl options:0 metrics:nil views:views]];
-        
-        NSString *heightVfl = @"V:|-0-[collectionView]-0-|";
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:heightVfl options:0 metrics:nil views:views]];
-        
+        [collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.bottom.equalTo(self.view);
+            make.top.equalTo(self.view).offset(topSpace);
+        }];
     }
     return _collectionView;
 }
@@ -204,14 +205,16 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
     // 初始化按钮
     [self setupButtons];
     
+    //底部toorbar 隐藏，此次需求暂时没有 18.10.25
     // 初始化底部ToorBar
-    [self setupToorBar];
+    //[self setupToorBar];
 }
 
 #pragma mark - setter
 #pragma mark 初始化按钮
 - (void) setupButtons{
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:@selector(back)];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:@selector(back)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(done)];
 }
 
 #pragma mark 初始化所有的组
@@ -246,8 +249,11 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
         // 处理
         UIImage *image = info[@"UIImagePickerControllerOriginalImage"];
         
-        [self.selectAssets addObject:image];
-        [self.toolBarThumbCollectionView reloadData];
+        //修改：保存到本地
+        image = [UIImage imageWithData:UIImageJPEGRepresentation(image, 0.6)];
+        UIImageWriteToSavedPhotosAlbum(image, self, @selector(image: didFinishSavingWithError: contextInfo:), nil);
+        [self.selectAssets addObject:[ZLPhotoAssets assetWithImage:image]];
+       //[self.toolBarThumbCollectionView reloadData];
         [self.takePhotoImages addObject:image];
         self.collectionView.selectAssets = [self.selectAssets mutableCopy];
         
@@ -265,6 +271,21 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
         NSLog(@"请在真机使用!");
     }
 }
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
+    if (error == nil) {
+        NSLog(@"保存相册成功");
+        ZLPhotoAssets *asset = self.selectAssets.lastObject;
+        NSMutableArray *allImgs = [NSMutableArray arrayWithArray:self.collectionView.dataArray];
+        [allImgs insertObject:asset atIndex:1];
+        self.collectionView.isRecoderSelectPicker = YES;
+        self.collectionView.dataArray = allImgs;
+    } else {
+        ///图片未能保存到本地
+        NSLog(@"图片保存本地失败");
+    }
+}
+
 
 #pragma mark -初始化底部ToorBar
 - (void) setupToorBar{
@@ -285,7 +306,6 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:self.doneBtn];
     
     toorBar.items = @[leftItem,fiexItem,rightItem];
-    
 }
 
 #pragma mark - setter
@@ -327,22 +347,19 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
 
 - (void) pickerCollectionViewDidSelected:(ZLPhotoPickerCollectionView *) pickerCollectionView deleteAsset:(ZLPhotoAssets *)deleteAssets{
     
-    if (self.selectPickerAssets.count == 0){
+    if (self.selectPickerAssets.count == 0) {
         self.selectAssets = [NSMutableArray arrayWithArray:pickerCollectionView.selectAssets];
-    }else if (deleteAssets == nil){
+    } else if (deleteAssets == nil) {
         [self.selectAssets addObject:[pickerCollectionView.selectAssets lastObject]];
     }
     
-    //    [self.selectAssets addObjectsFromArray:self.takePhotoImages];
-    
-    //    self.selectAssets = [NSMutableArray arrayWithArray:[[NSSet setWithArray:self.selectAssets] allObjects]];
     
     NSInteger count = self.selectAssets.count;
     self.makeView.hidden = !count;
     self.makeView.text = [NSString stringWithFormat:@"%ld",(long)count];
     self.doneBtn.enabled = (count > 0);
     
-    [self.toolBarThumbCollectionView reloadData];
+    //[self.toolBarThumbCollectionView reloadData];
     
     if (self.selectPickerAssets.count || deleteAssets) {
         ZLPhotoAssets *asset = [pickerCollectionView.lastDataArray lastObject];
@@ -363,18 +380,15 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
             }
         }
         
-        if (
-            (self.selectAssets.count > selectAssetsCurrentPage)
-            &&
-            (selectAssetsCurrentPage >= 0)
-            ){
+        if ((self.selectAssets.count > selectAssetsCurrentPage) &&
+            (selectAssetsCurrentPage >= 0)) {
             if (deleteAssets){
                 [self.selectAssets removeObjectAtIndex:selectAssetsCurrentPage];
             }
             
             [self.collectionView.selectsIndexPath removeObject:@(selectAssetsCurrentPage)];
             
-            [self.toolBarThumbCollectionView reloadData];
+            //[self.toolBarThumbCollectionView reloadData];
             self.makeView.text = [NSString stringWithFormat:@"%ld",(unsigned long)self.selectAssets.count];
         }
         // 刷新下最小的页数
@@ -419,7 +433,6 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
 #pragma mark -
 #pragma makr UICollectionViewDelegate
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    
     NSMutableArray *photos = [NSMutableArray array];
     if (self.selectAssets.count && self.selectAssets.count - 1 >= indexPath.item) {
         UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
@@ -462,11 +475,19 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
 - (void) back{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
 - (void) done{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [[NSNotificationCenter defaultCenter] postNotificationName:PICKER_TAKE_DONE object:nil userInfo:@{@"selectAssets":self.selectAssets}];
     });
-    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    //这里做个延时处理是为了解决Warning: Attempt to dismiss from view controller while a presentation or dismiss is in progress!
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW,(int64_t)(0.71 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self dismissViewControllerAnimated:YES completion:^{
+            [(UINavigationController *)self.presentingViewController popToRootViewControllerAnimated:YES];
+        }];
+    });
+    
 }
 
 

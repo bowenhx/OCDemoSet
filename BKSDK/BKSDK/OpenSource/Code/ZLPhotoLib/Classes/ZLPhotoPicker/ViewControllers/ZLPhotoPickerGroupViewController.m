@@ -109,10 +109,10 @@
     // 如果是相册
     ZLPhotoPickerGroup *gp = nil;
     for (ZLPhotoPickerGroup *group in self.groups) {
-        if (self.status == PickerViewShowStatusCameraRoll && ([group.groupName isEqualToString:@"Camera Roll"] || [group.groupName isEqualToString:@"相机胶卷"])) {
+        if (self.status == PickerViewShowStatusCameraRoll && ([group.groupName isEqualToString:@"Camera Roll"] || [group.groupName isEqualToString:@"相機膠捲"])) {
             gp = group;
             break;
-        }else if (self.status == PickerViewShowStatusSavePhotos && ([group.groupName isEqualToString:@"Saved Photos"] || [group.groupName isEqualToString:@"保存相册"])){
+        }else if (self.status == PickerViewShowStatusSavePhotos && ([group.groupName isEqualToString:@"Saved Photos"] || [group.groupName isEqualToString:@"保存相冊"])){
             gp = group;
             break;
         }else if (self.status == PickerViewShowStatusPhotoStream &&  ([group.groupName isEqualToString:@"Stream"] || [group.groupName isEqualToString:@"我的照片流"])){
@@ -125,7 +125,7 @@
     
     [self showWaitingAnimationWithText:nil];
     ZLPhotoPickerAssetsViewController *assetsVc = [[ZLPhotoPickerAssetsViewController alloc] init];
-    assetsVc.selectPickerAssets = self.selectAsstes;
+    //assetsVc.selectPickerAssets = self.selectAsstes;
     assetsVc.assetsGroup = gp;
     assetsVc.isShowCamera = self.isShowCamera;
     assetsVc.topShowPhotoPicker = self.topShowPhotoPicker;

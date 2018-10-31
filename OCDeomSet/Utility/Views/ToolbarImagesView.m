@@ -9,7 +9,6 @@
 #import "EmoticonInputView.h"
 #import "SmiliesModel.h"
 #import "PhotosGroupView.h"
-#import "ToolHeader.h"
 
 @interface ToolbarImagesView () <EmoticonViewDelegate>
 @property (nonatomic, strong) UIView *toolbarView;
@@ -42,7 +41,7 @@
         if (i == 2) {
             button.x = kSCREEN_WIDTH - kToolItemHeight - 10;
             [button setImage:[UIImage imageNamed:@"def_reply_upload"] forState:UIControlStateNormal];
-            //button.hidden = YES;
+            button.hidden = YES;
         } else {
             [button setImage:[UIImage imageNamed:images[i][0]] forState:UIControlStateNormal];
             [button setImage:[UIImage imageNamed:images[i][1]] forState:UIControlStateSelected];
@@ -64,24 +63,36 @@
     _photosListView = [PhotosGroupView new];
     _photosListView.y = _toolbarView.maxY;
     [self addSubview:_photosListView];
+    
+    @WEAKSELF(self);
+    _photosListView.showInsertButton = ^(BOOL show) {
+        selfWeak.buttons.lastObject.hidden = !show;
+    };
 }
 
 - (void)selectedToolBarItem:(UIButton *)button {
     button.selected = !button.selected;
+    
+    if (_selectedFinish) {
+        _selectedFinish(button.tag > 1 ? _photosListView.selectAssets : nil, button);
+    }
     if (button.tag == 0) {//选择表情
         if (button.selected) {
             _emoticonView.hidden = NO;
             _photosListView.hidden = YES;
+            self.buttons[1].selected = NO;
             //显示表情view
             [self showEmoticonView:YES];
         } else {
             //显示键盘
             [self showEmoticonView:NO];
         }
+        
     } else if (button.tag == 1) { //选择相册图片
         if (button.selected) {
             _emoticonView.hidden = YES;
             _photosListView.hidden = NO;
+            self.buttons.firstObject.selected = NO;
             //显示图片
             [self showPhotosView:YES];
         } else {
@@ -89,10 +100,25 @@
             [self showPhotosView:NO];
         }
     } else { //插入照片
-        if (_selectedFinish) {
-            _selectedFinish(_photosListView.selectAssets);
-        }
+        self.buttons[1].selected = NO;
+        [self showPhotosView:NO];
+        [self.photosListView.selectAssets removeAllObjects];
+        [self.photosListView reloadPhotos];
+        button.hidden = YES;
     }
+}
+
+- (void)setMaxCount:(NSUInteger)maxCount {
+    _maxCount = maxCount;
+    self.buttons[1].enabled = _maxCount;
+    self.photosListView.maxCount = maxCount;
+}
+
+- (void)hiddenImagesView {
+    [self showPhotosView:NO];
+    [self showEmoticonView:NO];
+    self.buttons[1].selected = NO;
+    self.buttons.firstObject.selected = NO;
 }
 
 - (void)showEmoticonView:(BOOL)show {

@@ -50,23 +50,23 @@
     
     // 需要记录选中的值的数据
     if (self.isRecoderSelectPicker){
-        NSMutableArray *selectAssets = [NSMutableArray array];
-        for (ZLPhotoAssets *asset in self.selectAssets) {
-            for (ZLPhotoAssets *asset2 in self.dataArray) {
-                
-                if (![asset isKindOfClass:[ZLPhotoAssets class]] || ![asset2 isKindOfClass:[ZLPhotoAssets class]]) {
-                    continue;
-                }
-                
-                if ([asset.assetURL isEqual:asset2.asset.defaultRepresentation.url]) {
-                    [selectAssets addObject:asset2];
-                    break;
-                }
-            }
-        }
+//        NSMutableArray *selectAssets = [NSMutableArray array];
+//        for (ZLPhotoAssets *asset in self.selectAssets) {
+//            for (ZLPhotoAssets *asset2 in self.dataArray) {
+//
+//                if (![asset isKindOfClass:[ZLPhotoAssets class]] || ![asset2 isKindOfClass:[ZLPhotoAssets class]]) {
+//                    continue;
+//                }
+//
+//                if ([asset.assetURL isEqual:asset2.asset.defaultRepresentation.url]) {
+//                    [selectAssets addObject:asset2];
+//                    break;
+//                }
+//            }
+//        }
         //修改： 当拍照时记录拍照后的顺序数字
         self.isRecoderSelectPicker = NO;
-        __block NSMutableArray *changeNum = [NSMutableArray arrayWithCapacity:selectAssets.count];
+        __block NSMutableArray *changeNum = [NSMutableArray arrayWithCapacity:_selectAssets.count];
         [self.selectsIndexPath enumerateObjectsUsingBlock:^(NSNumber *obj, NSUInteger idx, BOOL * _Nonnull stop) {
             [changeNum addObject:@(obj.integerValue + 1)];
         }];
@@ -74,7 +74,7 @@
         [changeNum addObject:@(1)];
         [self.selectsIndexPath setArray:changeNum];
         
-        _selectAssets = selectAssets;
+//        _selectAssets = _selectAssets;
     }
     
     [self reloadData];
@@ -115,11 +115,13 @@
             imageView.clipsToBounds = YES;
             imageView.userInteractionEnabled = YES;
             [cell.contentView addSubview:imageView];
-            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-            button.frame = CGRectMake(0, imageView.zl_height - 40, 40, 40);
-            [button setImage:[UIImage imageNamed:@"def_reply_gallery"] forState:UIControlStateNormal];
-            [button addTarget:self action:@selector(selectedPhotoLibrary) forControlEvents:UIControlEventTouchUpInside];
-            [imageView addSubview:button];
+            if (_isShowSeeAll) {
+                UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+                button.frame = CGRectMake(0, imageView.zl_height - 40, 40, 40);
+                [button setImage:[UIImage imageNamed:@"def_reply_gallery"] forState:UIControlStateNormal];
+                [button addTarget:self action:@selector(selectedPhotoLibrary) forControlEvents:UIControlEventTouchUpInside];
+                [imageView addSubview:button];
+            }
         }
         imageView.tag = indexPath.item;
         //修改相机图片
