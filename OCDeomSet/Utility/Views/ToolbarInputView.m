@@ -9,39 +9,11 @@
 #import "EmoticonInputView.h"
 #import "SmiliesModel.h"
 #import "ToolHeader.h"
+#import "UITextView+TextStorage.h"
 
 const float kMaxVisibleLine  = 5;          //最多显示5行
 const float kTextViewSpace   = 6.5;
 const float kTextViewHeight  = 36;
-
-
-@interface EmoticonTextAttachment : NSTextAttachment
-@property(strong, nonatomic) NSString *emoticonTag;
-@property(assign, nonatomic) CGFloat emoticonSize;  //For emoji image size
-@end
-
-@implementation EmoticonTextAttachment
-- (CGRect)attachmentBoundsForTextContainer:(NSTextContainer *)textContainer
-                      proposedLineFragment:(CGRect)lineFrag
-                             glyphPosition:(CGPoint)position
-                            characterIndex:(NSUInteger)charIndex {
-    return [self scaleImageSizeToWidth:_emoticonSize];
-}
-
-// Scale image size
-- (CGRect)scaleImageSizeToWidth:(CGFloat)width {
-    //Scale factor
-    CGFloat factor = 1.0;
-    //Get image size
-    CGSize oriSize = self.image.size;
-    //Calculate factor
-    factor = (CGFloat) (width / oriSize.width);
-    //Get new size
-    return CGRectMake(0, 0, oriSize.width * factor, oriSize.height * factor);
-}
-@end
-
-
 
 
 @interface ToolbarInputView () <UITextViewDelegate, EmoticonViewDelegate>
@@ -130,7 +102,7 @@ const float kTextViewHeight  = 36;
         }
     } else {
         if (_toolbarItemAction) {
-            _toolbarItemAction(button, [self attstringEncodeEmoticon]);
+            _toolbarItemAction(button, [self.textView attstringEncodeEmoticon]);
             
             if (_textView.text.length) {
                 [self endEditing];
@@ -150,47 +122,10 @@ const float kTextViewHeight  = 36;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidChangeFrame:) name:UIKeyboardDidChangeFrameNotification object:nil];
 }
 
-//textView 显示表情处理
-- (void)changeEmoticon:(NSString *)emoticon img:(UIImage *)img rang:(NSRange)rang insert:(BOOL)isInsert {
-    EmoticonTextAttachment *emojiTextAttachment = [EmoticonTextAttachment new];
-    //Set tag and image
-    emojiTextAttachment.emoticonTag = emoticon;
-    emojiTextAttachment.image = img;
-    //Set emoji size
-    emojiTextAttachment.emoticonSize = 30.0;
-    NSAttributedString *attring = [NSAttributedString attributedStringWithAttachment:emojiTextAttachment];
-    if (isInsert) {
-        //Insert emoji image
-        [_textView.textStorage insertAttributedString:attring atIndex:rang.location];
-        //Move selection location
-        _textView.selectedRange = NSMakeRange(rang.location + 1, rang.length);
-        [_textView.textStorage addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:17.0f] range:rang];
-    } else {
-        [_textView.textStorage replaceCharactersInRange:rang withAttributedString:attring];
-    }
-}
-
-- (NSString *)attstringEncodeEmoticon {
-    NSAttributedString *string = _textView.textStorage;
-    NSMutableString *plainString = [NSMutableString stringWithString:string.string];
-    __block NSUInteger base = 0;
-    [string enumerateAttribute:NSAttachmentAttributeName inRange:NSMakeRange(0, string.length)
-                     options:0
-                  usingBlock:^(id value, NSRange range, BOOL *stop) {
-          
-        if (value && [value isKindOfClass:[EmoticonTextAttachment class]]) {
-            [plainString replaceCharactersInRange:NSMakeRange(range.location + base, range.length)
-                                       withString:((EmoticonTextAttachment *) value).emoticonTag];
-            base += ((EmoticonTextAttachment *) value).emoticonTag.length - 1;
-        }
-    }];
-    return plainString;
-}
-
 #pragma mark - EmoticonInputDelegate
 - (void)emoticonInputDidTapText:(SmiliesModel *)model {
     UIImage *image = [UIImage imageWithContentsOfFile:model.replace];
-    [self changeEmoticon:model.search img:image rang:_textView.selectedRange insert:YES];
+    [_textView emoticonEncode:model.search emoticonImg:image rang:_textView.selectedRange insert:YES];
     NSRange wholeRange = NSMakeRange(0, _textView.textStorage.length);
     [_textView.textStorage removeAttribute:NSFontAttributeName range:wholeRange];
     [_textView.textStorage addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:17.0f] range:wholeRange];

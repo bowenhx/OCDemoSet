@@ -11,6 +11,8 @@
 #import "ToolbarInputView.h"
 #import "ToolbarImagesView.h"
 #import "EditImageViewCell.h"
+#import "SmiliesModel.h"
+#import "UITextView+TextStorage.h"
 
 static NSInteger const kMaxCount = 9; //最多选9张
 
@@ -25,7 +27,11 @@ static NSInteger const kMaxCount = 9; //最多选9张
 @end
 
 @implementation OneExampleViewController
-
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"selectedPhotosNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidChangeFrameNotification object:nil];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -35,27 +41,32 @@ static NSInteger const kMaxCount = 9; //最多选9张
 //    _inputView = [[ToolbarInputView alloc] initWithFrame:CGRectMake(0, kSCREEN_HEIGHT - 49, kSCREEN_WIDTH, 49)];
 //    [self.view addSubview:_inputView];
     
+    
+    //2.发布主题 和选择图片
+    _inputImgView = [[ToolbarImagesView alloc] initWithFrame:CGRectMake(0, kSCREEN_HEIGHT - 49, kSCREEN_WIDTH, 49)];
+    _inputImgView.maxCount = kMaxCount;
+    [self.view addSubview:_inputImgView];
+    
     _flowLayout.minimumLineSpacing = 1;
-    //最小item间距（默认为10）
     _flowLayout.minimumInteritemSpacing = 1;
     float cellW = (_collectionView.w - 4) / 3.0;
     _flowLayout.itemSize = CGSizeMake(cellW, cellW);
     _flowLayout.sectionInset = UIEdgeInsetsMake(0, 1, 0, 1);
     [_collectionView registerNib:[UINib nibWithNibName:kEditImageViewCellIdentifier bundle:nil] forCellWithReuseIdentifier:kEditImageViewCellIdentifier];
-//    [_collectionView registerClass:UICollectionViewCell.class forCellWithReuseIdentifier:@"cell"];
     _collectionView.layer.borderWidth = 1;
     _textView.layer.borderWidth = 1;
     _textView.layer.borderColor = [UIColor redColor].CGColor;
     _dataSource = [NSMutableArray array];
     
-    //2.发布主题
-    _inputImgView = [[ToolbarImagesView alloc] initWithFrame:CGRectMake(0, kSCREEN_HEIGHT - 49, kSCREEN_WIDTH, 49)];
-    _inputImgView.maxCount = kMaxCount;
-    [self.view addSubview:_inputImgView];
-    
     @WEAKSELF(self);
-    _inputImgView.selectedFinish = ^(NSArray<ZLPhotoAssets *> *photos, UIButton *button) {
-        if (photos && photos.count) {
+    _inputImgView.selectedFinish = ^(SmiliesModel *model, NSArray<ZLPhotoAssets *> *photos, UIButton *button) {
+        if (model) {
+            UIImage *image = [UIImage imageWithContentsOfFile:model.replace];
+            [selfWeak.textView emoticonEncode:model.search emoticonImg:image rang:selfWeak.textView.selectedRange insert:YES];
+            NSRange wholeRange = NSMakeRange(0, selfWeak.textView.textStorage.length);
+            [selfWeak.textView.textStorage removeAttribute:NSFontAttributeName range:wholeRange];
+            [selfWeak.textView.textStorage addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:17.0f] range:wholeRange];
+        } else if (photos && photos.count) {
             [selfWeak.dataSource addObjectsFromArray:photos];
             [selfWeak.collectionView reloadData];
             selfWeak.inputImgView.maxCount = kMaxCount - selfWeak.dataSource.count;
@@ -88,7 +99,6 @@ static NSInteger const kMaxCount = 9; //最多选9张
     };
 }
 
-
 - (void)selectedAllPhotos {
     ZLPhotoPickerViewController *pickerVc = [[ZLPhotoPickerViewController alloc] init];
     pickerVc.maxCount = kMaxCount - self.dataSource.count;
@@ -120,10 +130,8 @@ static NSInteger const kMaxCount = 9; //最多选9张
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     EditImageViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kEditImageViewCellIdentifier forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor redColor];
     cell.delegate = self;
     cell.deleteBtn.tag = indexPath.row;
-    [cell.deleteBtn setTitle:kStringInt(indexPath.row) forState:UIControlStateNormal];
     UIImage *image = self.dataSource[indexPath.row].originImage;
     if (image) {
        cell.imageView.image = image;
@@ -139,7 +147,6 @@ static NSInteger const kMaxCount = 9; //最多选9张
     NSDictionary *userInfo = notification.userInfo;
     double duration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     CGFloat keyboardF = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].origin.y;
-//    _keyboardY = keyboardF.origin.y;
     [UIView animateWithDuration:duration animations:^{
         if (keyboardF > kSCREEN_HEIGHT) {
             self.inputImgView.y = kSCREEN_HEIGHT - self.inputImgView.h;
@@ -169,7 +176,8 @@ static NSInteger const kMaxCount = 9; //最多选9张
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     if (_inputView) [_inputView endEditing];
-    
+    if (_inputImgView) [_inputImgView hiddenImagesView];
+    [self.view endEditing:YES];
 }
 
 

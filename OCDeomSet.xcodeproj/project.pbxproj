@@ -25,6 +25,7 @@
 		928B3E6F2186BCFD003AD3DC /* ThemeDetailMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 928B3E6E2186BCFD003AD3DC /* ThemeDetailMoreView.m */; };
 		929DC38521893E7600C14DF6 /* EditImageViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 929DC38321893E7600C14DF6 /* EditImageViewCell.m */; };
 		929DC38621893E7600C14DF6 /* EditImageViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 929DC38421893E7600C14DF6 /* EditImageViewCell.xib */; };
+		929DC38A218996CE00C14DF6 /* UITextView+TextStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 929DC389218996CE00C14DF6 /* UITextView+TextStorage.m */; };
 		92B4737E21804AA90026E371 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 92B4737D21804AA90026E371 /* AppDelegate.m */; };
 		92B4738421804AA90026E371 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92B4738221804AA90026E371 /* Main.storyboard */; };
 		92B4738621804AAB0026E371 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92B4738521804AAB0026E371 /* Assets.xcassets */; };
@@ -76,6 +77,8 @@
 		929DC38221893E7600C14DF6 /* EditImageViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditImageViewCell.h; sourceTree = "<group>"; };
 		929DC38321893E7600C14DF6 /* EditImageViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditImageViewCell.m; sourceTree = "<group>"; };
 		929DC38421893E7600C14DF6 /* EditImageViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditImageViewCell.xib; sourceTree = "<group>"; };
+		929DC388218996CE00C14DF6 /* UITextView+TextStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITextView+TextStorage.h"; sourceTree = "<group>"; };
+		929DC389218996CE00C14DF6 /* UITextView+TextStorage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITextView+TextStorage.m"; sourceTree = "<group>"; };
 		92B4737921804AA90026E371 /* OCDeomSet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OCDeomSet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92B4737C21804AA90026E371 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		92B4737D21804AA90026E371 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -162,6 +165,8 @@
 				929DC38221893E7600C14DF6 /* EditImageViewCell.h */,
 				929DC38321893E7600C14DF6 /* EditImageViewCell.m */,
 				929DC38421893E7600C14DF6 /* EditImageViewCell.xib */,
+				929DC388218996CE00C14DF6 /* UITextView+TextStorage.h */,
+				929DC389218996CE00C14DF6 /* UITextView+TextStorage.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -349,6 +354,7 @@
 				928B3E6321869ED4003AD3DC /* PhotosGroupView.m in Sources */,
 				92B4738C21804AAB0026E371 /* main.m in Sources */,
 				928B3E6621869ED4003AD3DC /* NSString+UIColor.m in Sources */,
+				929DC38A218996CE00C14DF6 /* UITextView+TextStorage.m in Sources */,
 				928B3E6021869ED4003AD3DC /* OneExampleViewController.m in Sources */,
 				928B3E6921869ED4003AD3DC /* CustomAlertController.m in Sources */,
 				928B3E6821869ED4003AD3DC /* BKCustomPickerView.m in Sources */,

@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "ToolHeader.h"
+#import "SmiliesModel.h"
 
 @interface ToolbarImagesView : UIView
 @property (nonatomic, assign) NSUInteger maxCount;
-@property (nonatomic, copy) void(^selectedFinish)(NSArray <ZLPhotoAssets *> *photos, UIButton *button);
+@property (nonatomic, copy) void(^selectedFinish)(SmiliesModel *model, NSArray <ZLPhotoAssets *> *photos, UIButton *button);
 - (void)hiddenImagesView;
 @end

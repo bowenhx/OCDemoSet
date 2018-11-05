@@ -7,7 +7,6 @@
 
 #import "ToolbarImagesView.h"
 #import "EmoticonInputView.h"
-#import "SmiliesModel.h"
 #import "PhotosGroupView.h"
 
 @interface ToolbarImagesView () <EmoticonViewDelegate>
@@ -74,7 +73,7 @@
     button.selected = !button.selected;
     
     if (_selectedFinish) {
-        _selectedFinish(button.tag > 1 ? _photosListView.selectAssets : nil, button);
+        _selectedFinish(nil, button.tag > 1 ? _photosListView.selectAssets : nil, button);
     }
     if (button.tag == 0) {//选择表情
         if (button.selected) {
@@ -105,6 +104,12 @@
         [self.photosListView.selectAssets removeAllObjects];
         [self.photosListView reloadPhotos];
         button.hidden = YES;
+    }
+}
+
+- (void)emoticonInputDidTapText:(SmiliesModel *)model {
+    if (_selectedFinish) {
+        _selectedFinish(model, nil, nil);
     }
 }
 
