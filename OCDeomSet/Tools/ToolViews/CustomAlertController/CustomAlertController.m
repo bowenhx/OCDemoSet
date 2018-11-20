@@ -7,6 +7,7 @@
 //
 
 #import "CustomAlertController.h"
+#import "ToolHeader.h"
 @interface AlertViewParams: NSObject
 @property (nonatomic, strong) UIViewController *controller;
 
@@ -245,9 +246,8 @@
     if (self.params.controller) {
         [self.params.controller presentViewController:alert animated:true completion:nil];
     } else {
-        //经测试如果不传如当前控制器很有可能不会弹出 alertController
         UIWindow *window = [UIApplication sharedApplication].keyWindow;
-        [window.rootViewController presentViewController:alert animated:true completion:nil];
+        [window.visibleViewController presentViewController:alert animated:true completion:nil];
     }
     
     return self;
