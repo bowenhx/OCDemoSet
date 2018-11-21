@@ -20,7 +20,8 @@
     [super viewDidLoad];
     self.navigationItem.title = @"test demo";
     
-    _classNames = @[@"OneExampleViewController"];
+    _classNames = @[@"OneExampleViewController",
+                    @"TowExampleViewController"];
 }
 
 #pragma mark - Table view data source

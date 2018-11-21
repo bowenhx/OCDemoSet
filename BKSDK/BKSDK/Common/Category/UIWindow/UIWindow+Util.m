@@ -14,7 +14,7 @@
     return [UIWindow getVisibleViewControllerFrom:rootViewController];
 }
 
-+ (UIViewController *) getVisibleViewControllerFrom:(UIViewController *)vc {
++ (UIViewController *)getVisibleViewControllerFrom:(UIViewController *)vc {
     if ([vc isKindOfClass:[UINavigationController class]]) {
         return [UIWindow getVisibleViewControllerFrom:[((UINavigationController *) vc) visibleViewController]];
     } else if ([vc isKindOfClass:[UITabBarController class]]) {
